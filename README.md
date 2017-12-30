@@ -13,7 +13,7 @@
 
 http://nginx.org/
 
-**nginx 运行命令：**
+**nginx 运行命令(windows)：**
 
 nginx -c conf\nginx.conf
 
