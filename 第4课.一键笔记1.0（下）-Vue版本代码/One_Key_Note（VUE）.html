@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>一键笔记(Vue版本)</title>
+        <script type="text/javascript" src="js/vue.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" >
+    </head>
+    <body>
+        <!--main code-->
+
+        <div id="vue_things">
+            <div id ="top" v-bind:style="styleTop">
+                <button type="button" @click="screen_change('left')"><-</button>
+                <button type="button" @click="screen_change('right')">-></button>
+            </div>
+            <div id="left" v-bind:style="styleLeft">
+                <input type="text" id="left_input" v-bind:style="inputStyle" @keyup.enter="change_website('left')" v-model="left_address">
+                <iframe id="left_iframe" v-bind:style="frameStyle" v-bind:src="left_website"></iframe>
+            </div>
+    
+            <div id="right" v-bind:style="styleRight">
+                <input type="text" id="right_input" v-bind:style="inputStyle" @keyup.enter="change_website('right')" v-model="right_address">
+                <iframe id="right_iframe" v-bind:style="frameStyle" v-bind:src="right_website"></iframe>
+            </div>
+        </div>
+        <script>
+            var vue_things=new Vue({
+                el:'#vue_things',
+                data:
+                {
+                    //下面是样式
+                    styleTop:{
+                        textAlign:'center'
+                    },
+                    styleLeft:{
+                        float:'left',
+                        width:'50%'
+                    },
+                    styleRight:{
+                        float:'left',
+                        width:'50%',
+                        overflow:'hidden'                 
+                    },
+                    frameStyle:{
+                        width:'100%',
+                        height:'100%' 
+                    },
+                    inputStyle:{
+                        width:'100%'
+                    },
+                    //下面是变量
+                    left_website:"https://cn.bing.com",
+                    right_website:"https://www.zybuluo.com",
+                    left_address:"https://",
+                    right_address:"https://"
+                },
+                methods:
+                {
+                    change_website:function(l_or_r)
+                    {
+                        if(l_or_r=="left")
+                        {
+                            vue_things.left_website=vue_things.left_address
+                        }
+                        else
+                        {
+                            vue_things.right_website=vue_things.right_address
+                        }
+                    },
+                    screen_change:function(l_or_r)
+                    {
+                        if(l_or_r=="left")
+                        {
+                            if(vue_things.styleLeft.width=="100%")
+                            {
+                                vue_things.styleLeft.width="50%"
+                                vue_things.styleRight.width="50%"
+                            }
+                            else if(vue_things.styleLeft.width=="50%")
+                            {
+                                vue_things.styleLeft.width="0%"
+                                vue_things.styleRight.width="100%"
+                            }           
+                        }
+                        else
+                        {
+                            if(vue_things.styleRight.width=="100%")
+                            {
+                                vue_things.styleLeft.width="50%"
+                                vue_things.styleRight.width="50%"                            
+                            }
+                            else if(vue_things.styleRight.width=="50%")
+                            {
+                                vue_things.styleLeft.width="100%"
+                                vue_things.styleRight.width="0%"
+                            }
+                        }
+                    },  
+                }
+            })
+/*
+var vue_things=new Vue({    //起个变量名，最好和el对应上
+    el:'#vue_things',   //这是大DIV的名字
+    data:
+    {
+        //来点数据
+    },
+    methods:
+    {
+        a_function:function()
+        {
+            //来点函数
+        },
+        
+    }
+})
+*/
+        </script>
+    </body>
+</html>
